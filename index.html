@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<title>Tıkla Efekt</title>
+
+<style>
+  body {
+    margin: 0;
+    height: 100vh;
+    background: radial-gradient(circle at top, #1a1a1a, #000);
+    cursor: pointer;
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+  }
+
+  .yazi {
+    position: absolute;
+    font-size: 28px;
+    font-weight: 800;
+    text-shadow:
+      0 0 5px rgba(255,255,255,0.6),
+      0 0 10px currentColor,
+      0 0 20px currentColor;
+    animation: ucarakKaybol 1.8s ease-out forwards;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  @keyframes ucarakKaybol {
+    0% {
+      opacity: 0;
+      transform: translateY(10px) scale(0.8);
+    }
+    20% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+      transform: translateY(-80px) scale(1.2);
+    }
+  }
+</style>
+</head>
+<body>
+
+<script>
+const renkler = [
+  "#ff4d4d",
+  "#00eaff",
+  "#a855f7",
+  "#22c55e",
+  "#facc15"
+];
+
+document.addEventListener("click", function(e) {
+  const yazi = document.createElement("div");
+  yazi.className = "yazi";
+  yazi.innerText = "KÜRTLERE ÖLÜM";
+
+  const renk = renkler[Math.floor(Math.random() * renkler.length)];
+  yazi.style.color = renk;
+
+  yazi.style.left = e.clientX + "px";
+  yazi.style.top = e.clientY + "px";
+
+  document.body.appendChild(yazi);
+
+  setTimeout(() => {
+    yazi.remove();
+  }, 1800);
+});
+</script>
+
+</body>
+</html>
